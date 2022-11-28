@@ -1,4 +1,4 @@
- const ContactsItem = ({ name,tel, onRemove,id,children }) => {
+const ContactsItem = ({ name,tel, onRemove,id,children }) => {
    return( 
     
            <li >
@@ -9,9 +9,9 @@
     )
 }
 export const Contacts = ({ contacts, onRemove }) => {
-    // if (contacts.length === 0) {
-    //     return null;
-    // }
+    if (contacts.length === 0) {
+        return null;
+    }
    
     
     return( 

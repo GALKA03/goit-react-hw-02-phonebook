@@ -1,11 +1,10 @@
 import { Component } from "react";
 import { nanoid } from 'nanoid'
-//import {Conteiner} from './Conteiner/Conteiner'
+
 import { Filter } from "./Filter/Filter";
 import Form from "./Form/Form";
 import { Contacts } from "./Contacts/Contacts";
 
-//model.id = nanoid()
 export class App extends Component {
   state = {
     contacts: [
@@ -17,51 +16,47 @@ export class App extends Component {
      filter: '',
   }
 // добавление новых контактов к старым.
-  handleAddContact = (newContact) =>
-    this.setState(({ contacts,name,tel }) => ({
-      contacts: [...contacts, newContact]
+  // handleAddContact = (newContact) =>
+  //   this.setState(({ contacts}) => ({
+  //     contacts: [...contacts, newContact]
     
-    }));
-
-  
-    // проверка на существование контактов
-  handleIdChecked = (name) => {
+  //   }));
+  addContacts = ({ name, tel }) => {
+    const showContacts = {
+      name, tel, id: nanoid(),
+    }
     const { contacts } = this.state;
-    const isExistContact = contacts.find(contact => contact.name===name) //сравниваем имя с добавленным если найдет тру, нет=фолс
-    if (isExistContact) {
-      alert('contact does not exist')
-      return
-    } 
+    if (contacts.find(contact => contact.name === name)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
     else {
-      
-      }
-  }
+      this.setState(({ contacts }) => ({
+       contacts: [...contacts,showContacts]
+      }))
+    }   
+}
   deliteContacts = (id) => {
     this.setState((prevState) => ({contacts: prevState.contacts.filter((contact) => contact.id !== id) 
     }))    
  }
- 
-  
-  
   HandleChangeFilterInput = e => {
-    //const { name, value } = target;
     console.log(e.target.value)
     this.setState({
      [e.target.name]: e.target.value,
-    })
-    
+    }) 
  } 
   handleAddFilter = () => {
     const {contacts, filter} = this.state;
     return contacts.filter((contact)=>contact.name.toLowerCase().includes(filter.toLowerCase()))
-}
+  }
 render() {
   //const { contacts } = this.state;
   const { filter } = this.state;
     return (
              <div>
             <h1>Phonebook</h1>
-        <Form contactsAdd={this.handleAddContact} onIdChecked={this.handleIdChecked} />
+        <Form addContacts={this.addContacts} />
         <h2>Contacts</h2> 
         <Filter filter={filter} onChange={this.HandleChangeFilterInput} />
           <Contacts contacts={this.handleAddFilter()} onRemove={this.deliteContacts} />

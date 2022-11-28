@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { nanoid } from 'nanoid'
+//import { nanoid } from 'nanoid'
 class Form extends Component{
 state = {
   name: '',
@@ -13,13 +13,13 @@ state = {
     } 
 hendleFormSubmit = e => {
     e.preventDefault();
-    const { name, tel } = this.state;
-    const { contactsAdd } = this.props;
+    //const { name, tel } = this.state;
+    const { addContacts } = this.props;
     const isValid = this.validateFormSubmit()
     if (!isValid) {
         return
-    }
-    contactsAdd ({id: nanoid(),name,tel})
+    } 
+  addContacts();
     this.reset()
     }
  reset = () => {
@@ -27,13 +27,13 @@ hendleFormSubmit = e => {
     };
     validateFormSubmit = () => {
         const { name, tel } = this.state;
-        const {onIdChecked} = this.props;
+        const { addContacts} = this.props;
         console.log('props',this.props)
         if (!name || !tel) {
           alert('some file is empty')
             return false;
         }
-        return  onIdChecked(name)
+        return   addContacts(name)
         
     }
     render() {
