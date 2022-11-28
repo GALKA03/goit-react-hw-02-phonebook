@@ -8,59 +8,83 @@ import { Contacts } from "./Contacts/Contacts";
 export class App extends Component {
   state = {
     contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-     filter: '',
+    filter: '',
   }
-// добавление новых контактов к старым.
+  // добавление новых контактов к старым.
   // handleAddContact = (newContact) =>
   //   this.setState(({ contacts}) => ({
   //     contacts: [...contacts, newContact]
     
   //   }));
-  addContacts = ({ name, tel }) => {
-    const showContacts = {
-      name, tel, id: nanoid(),
-    }
+  addContacts = ({ name, number }) => {
+    const showContacts = {name, number, id: nanoid(),}
+    console.log(showContacts)
     const { contacts } = this.state;
     if (contacts.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
       return;
     }
     else {
-      this.setState(({ contacts }) => ({
-       contacts: [...contacts,showContacts]
-      }))
-    }   
+       this.setState(({ contacts }) => ({
+        contacts: [showContacts,...contacts]
+        
+        }))
+      }
+    
 }
   deliteContacts = (id) => {
-    this.setState((prevState) => ({contacts: prevState.contacts.filter((contact) => contact.id !== id) 
-    }))    
- }
-  HandleChangeFilterInput = e => {
-    console.log(e.target.value)
-    this.setState({
-     [e.target.name]: e.target.value,
-    }) 
- } 
-  handleAddFilter = () => {
-    const {contacts, filter} = this.state;
-    return contacts.filter((contact)=>contact.name.toLowerCase().includes(filter.toLowerCase()))
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((contact) => contact.id !== id)
+    }))
   }
+  HandleChangeFilterInput = e => {
+    this.setState({
+      [e.target.name]: e.target.value,
+
+    })
+  }
+  handleAddFilter = () => {
+   const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+    
+     //console.log('try', contact.name.includes(contact.filter))
+       //.toLowerCase().includes(contact.filter)
+     //return f;//console.log(contact.filter)
+  }
+//}
+    
+     
+      //   contacts.filter(elem =>
+      // elem.name.toLowerCase().includes(filter))
+// const filt = contacts.filter(contact => { contact.name.toLowerCase().includes(contact.filter)
+//       console.log(contact.filter)
+//       return filt;
+//      })
+  
+  //}
 render() {
   //const { contacts } = this.state;
   const { filter } = this.state;
+  const addFilter = this.handleAddFilter() 
+  console.log('addFilter ',addFilter)
+  //console.log(filter)
     return (
-             <div>
+             <>
             <h1>Phonebook</h1>
         <Form addContacts={this.addContacts} />
         <h2>Contacts</h2> 
         <Filter filter={filter} onChange={this.HandleChangeFilterInput} />
-          <Contacts contacts={this.handleAddFilter()} onRemove={this.deliteContacts} />
-      </div>
+          <Contacts contacts={addFilter} onRemove={this.deliteContacts} />
+      </>
 
     )}
 }

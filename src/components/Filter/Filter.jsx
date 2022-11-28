@@ -1,4 +1,5 @@
-export const Filter = ({ onChange, filter}) => {
+import PropTypes from 'prop-types';
+export const Filter = ({ onChange, filter }) => {
     return (
          <label>
         Find contacts by name
@@ -11,3 +12,8 @@ export const Filter = ({ onChange, filter}) => {
         </label>  
     )
 }
+
+Filter.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};

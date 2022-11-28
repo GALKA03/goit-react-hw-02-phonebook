@@ -3,7 +3,7 @@ import { Component } from "react";
 class Form extends Component{
 state = {
   name: '',
-  tel:'',
+  number:'',
     }
  handleChangeForm = e => {
    
@@ -14,22 +14,22 @@ state = {
 hendleFormSubmit = e => {
     e.preventDefault();
     //const { name, tel } = this.state;
-    const { addContacts } = this.props;
+    const {addContacts } = this.props;
     const isValid = this.validateFormSubmit()
     if (!isValid) {
         return
     } 
-  addContacts();
+  addContacts(...this.state);
     this.reset()
     }
  reset = () => {
-        this.setState({ name: '', tel: '' })
+        this.setState({ name: '', number: '' })
     };
     validateFormSubmit = () => {
-        const { name, tel } = this.state;
+        const { name, number } = this.state;
         const { addContacts} = this.props;
         console.log('props',this.props)
-        if (!name || !tel) {
+        if (!name || !number) {
           alert('some file is empty')
             return false;
         }
@@ -37,7 +37,7 @@ hendleFormSubmit = e => {
         
     }
     render() {
-        const { name,tel } = this.state;
+        const { name,number } = this.state;
       return (
           
            <form onSubmit={this.hendleFormSubmit}>
@@ -57,10 +57,10 @@ hendleFormSubmit = e => {
             <label >
               Number
                     <input
-                value={tel} 
+                value={number} 
             onChange = {this.handleChangeForm} 
   type="number"
-  name="tel"
+  name="number"
   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
   title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
   required
