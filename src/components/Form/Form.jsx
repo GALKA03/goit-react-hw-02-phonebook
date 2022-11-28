@@ -5,22 +5,14 @@ state = {
   name: '',
   tel:'',
     }
-    // nameId = nanoid();
-    // telId = nanoid();
  handleChangeForm = e => {
-    // console.log(e.target.value)
-    // console.log(e.target.name)
+   
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value,
     })
-    }
-    // hendleChengForm = ({target}) => {
-    // const { name, value } = target;
-    // this.setState({ [name]: value })
-  //}
+    } 
 hendleFormSubmit = e => {
     e.preventDefault();
-   // this.props.formSubmit({ ...this.state });
     const { name, tel } = this.state;
     const { contactsAdd } = this.props;
     const isValid = this.validateFormSubmit()
@@ -30,8 +22,7 @@ hendleFormSubmit = e => {
     contactsAdd ({id: nanoid(),name,tel})
     this.reset()
     }
-
-    reset = () => {
+ reset = () => {
         this.setState({ name: '', tel: '' })
     };
     validateFormSubmit = () => {
@@ -85,3 +76,7 @@ hendleFormSubmit = e => {
 
 export default Form
 
+ // hendleChengForm = ({target}) => {
+    // const { name, value } = target;
+    // this.setState({ [name]: value })
+  //}

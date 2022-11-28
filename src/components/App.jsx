@@ -1,5 +1,5 @@
 import { Component } from "react";
-//import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid'
 //import {Conteiner} from './Conteiner/Conteiner'
 import { Filter } from "./Filter/Filter";
 import Form from "./Form/Form";
@@ -17,27 +17,24 @@ export class App extends Component {
      filter: '',
   }
 // добавление новых контактов к старым.
-  handleAddContact = (newContact) => 
-    this.setState(({ contacts }) => ({ 
-      contacts : [...contacts, newContact]
-    }))
-  
-//      handleAddContact = data => { 
-//     const newContact = {
-//       ...data, id: nanoid()
-//     }
-//     this.setState(prevState => ({
-//       contacts:[...prevState.contacts, newContact]
-//     }))
-//     console.log(newContact)
-//  }
+  handleAddContact = (newContact) =>
+    this.setState(({ contacts,name,tel }) => ({
+      contacts: [...contacts, newContact]
+    
+    }));
+
   
     // проверка на существование контактов
   handleIdChecked = (name) => {
     const { contacts } = this.state;
-    const isExistContact = !!contacts.find(contact => contact.name===name) //сравниваем имя с добавленным если найдет тру, нет=фолс
-    isExistContact && alert('contact does not exist')
-    return !isExistContact
+    const isExistContact = contacts.find(contact => contact.name===name) //сравниваем имя с добавленным если найдет тру, нет=фолс
+    if (isExistContact) {
+      alert('contact does not exist')
+      return
+    } 
+    else {
+      
+      }
   }
   deliteContacts = (id) => {
     this.setState((prevState) => ({contacts: prevState.contacts.filter((contact) => contact.id !== id) 
