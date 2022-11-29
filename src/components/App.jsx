@@ -77,13 +77,24 @@ render() {
   console.log('addFilter ',addFilter)
   //console.log(filter)
     return (
-             <>
+             <div
+        style={{
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: 20,
+          backgroundColor: "yellow",
+          color: '#010101',
+        }}
+      >
             <h1>Phonebook</h1>
         <Form addContacts={this.addContacts} />
         <h2>Contacts</h2> 
         <Filter filter={filter} onChange={this.HandleChangeFilterInput} />
           <Contacts contacts={addFilter} onRemove={this.deliteContacts} />
-      </>
+      </div>
 
     )}
 }
