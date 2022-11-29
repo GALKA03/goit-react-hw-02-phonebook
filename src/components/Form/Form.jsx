@@ -1,5 +1,5 @@
 import { Component } from "react";
-//import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid'
 class Form extends Component{
 state = {
   name: '',
@@ -13,13 +13,14 @@ state = {
     } 
 hendleFormSubmit = e => {
     e.preventDefault();
-    //const { name, tel } = this.state;
+    //const { name, number} = this.state;
     const {addContacts } = this.props;
     const isValid = this.validateFormSubmit()
     if (!isValid) {
         return
     } 
-  addContacts(this.state);
+ //addContacts({ id: nanoid(), name, number });
+  addContacts(this.state)
     this.reset()
     }
  reset = () => {
