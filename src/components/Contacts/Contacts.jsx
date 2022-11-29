@@ -1,9 +1,9 @@
-//import PropTypes from 'prop-types';
-const ContactsItem = ({ name, tel, onRemove, id, children }) => {
+import PropTypes from 'prop-types';
+const ContactsItem = ({ name, number, onRemove, id, children }) => {
    return( 
     
            <li >
-               {name}:{tel} <button onClick={()=> onRemove(id)}>Delete</button>
+               {name}:{number} <button onClick={()=> onRemove(id)}>Delete</button>
       {children}
        </li>
 
@@ -23,7 +23,16 @@ export const Contacts = ({ contacts, onRemove }) => {
     </ul>
     )
 }
-
+ContactsItem.prototype = {
+    name: PropTypes.string.isRequired,
+    number: PropTypes.number.isRequired,
+    onRemove: PropTypes.func,
+ id:PropTypes.func
+}
+Contacts.prototype = {
+    contacts: PropTypes.func,
+    onRemove:PropTypes.func
+}
 //    <ul>
 //         {contacts.map(({ name, number, id }) => (
 //             <li key={id}

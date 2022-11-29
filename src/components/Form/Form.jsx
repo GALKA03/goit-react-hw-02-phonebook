@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { nanoid } from 'nanoid'
+import PropTypes from 'prop-types';
 class Form extends Component{
 state = {
   name: '',
@@ -34,7 +34,7 @@ hendleFormSubmit = e => {
           alert('some file is empty')
             return false;
         }
-        return   addContacts(name)
+      return addContacts({ name, number })
         
     }
     render() {
@@ -76,6 +76,10 @@ hendleFormSubmit = e => {
     
 
 export default Form
+Form.propTypes = {
+ handleChangeForm: PropTypes.func,
+
+};
 
  // hendleChengForm = ({target}) => {
     // const { name, value } = target;
