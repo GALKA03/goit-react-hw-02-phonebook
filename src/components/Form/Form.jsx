@@ -19,7 +19,7 @@ hendleFormSubmit = e => {
     if (!isValid) {
         return
     } 
-  addContacts(...this.state);
+  addContacts(this.state);
     this.reset()
     }
  reset = () => {

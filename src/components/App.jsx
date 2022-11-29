@@ -29,7 +29,7 @@ export class App extends Component {
       alert(`${name} is already in contacts`);
       return;
     }
-    else {
+    else{
        this.setState(({ contacts }) => ({
         contacts: [showContacts,...contacts]
         
@@ -50,13 +50,12 @@ export class App extends Component {
   }
   handleAddFilter = () => {
    const { filter, contacts } = this.state;
-    const normalizedFilter = filter.toLowerCase();
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
+    //const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(elem =>
+      elem.name.toLowerCase().includes(filter),
     );
     
-     //console.log('try', contact.name.includes(contact.filter))
+     //console.log('try', contact.name.includes(filter))
        //.toLowerCase().includes(contact.filter)
      //return f;//console.log(contact.filter)
   }
